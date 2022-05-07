@@ -1,0 +1,56 @@
+.Footer{
+    display: flex;
+    // align-items: center;
+    // justify-content: center;
+    height: 280px;
+    background-color: aliceblue;
+    padding: 0 50px;
+
+
+    .sect1{
+        flex: 1;
+        margin-right: 5px;
+        margin-top: 20px;
+        h3{
+            font-size: 30px;
+            margin-bottom: 10px;
+
+        }
+    }
+    .sect2{
+        flex: 1.5;
+        margin-top: 20px;
+        h3{
+            margin-left: 45px;
+        }
+    }
+    .sect3{
+        flex: 1.5;
+        margin-top: 20px;
+        h3{
+            margin-left: 15px;
+
+        }
+    }
+    .contectsect{
+        display: flex;
+        margin-top: 20px;
+        align-items: center;
+        // justify-content: center;
+        width: fit-content;
+
+        .icon{
+            margin-right: 10px;
+        }
+
+        div{
+            h6{
+                margin: 0;
+                font-size: 15px;
+            }
+            span{
+                font-size: 14px;
+            }
+        }
+    }
+}

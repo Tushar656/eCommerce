@@ -1,0 +1,60 @@
+.Register{
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3)), url("../../../public/Assets/Login.jpg") center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    
+    .RegisterSection{
+        h2{
+            font-weight: 500;
+        }
+        background-color: white;
+        width: 40vw;
+        height: 60vh;
+        border-radius: 20px;
+        padding: 20px;
+        filter: opacity(0.8);
+
+        form{
+            display: flex;
+            flex-direction: column;
+
+            input{
+                margin: 10px 0px;
+                width: 90%;
+                padding: 10px 10px;
+                border-radius: 10px;
+                font-size: 18px;
+                background-color: rgb(206, 206, 206);
+                border: none;
+            }
+
+            button{
+                padding: 8px 15px;
+                background-color: teal;
+                font-size: 18px;
+                width: 130px;
+                border-radius: 10px;
+                margin-top: 20px;
+                border: none;
+                color: white;
+                cursor: pointer;
+            }
+        }
+        .alrdyHaveacc{
+            margin-top: 20px;
+            font-size: 14px;
+            width: fit-content;
+            cursor: pointer;
+            color: blue;
+            
+            &:hover{
+                border-bottom: 2px solid blue;
+                font-weight: 600;
+            }
+        }
+    }
+}
