@@ -1,16 +1,15 @@
 const Cart = require("../models/Cart");
-const CryptoJS = require("crypto-js");
-const { verifyTokenandAuth, verifyTokenandAdmin } = require("./verifyToken");
+const { verifyTokenandAuth, verifyTokenandAdmin, verifyToken } = require("./verifyToken");
 
 const router = require("express").Router();
 
 
 //CREATE
-router.post('/', verifyTokenandAdmin, async(req, res)=>{
-    const newProduct = new Product(req.body);
+router.post('/', verifyToken, async(req, res)=>{
+    const newCart = new Cart(req.body);
 
     try{
-        const savedProduct = await newProduct.save();
+        const savedProduct = await newCart.save();
         res.status(201).send(savedProduct);
     }catch(err){
         res.status(500).send(err)
@@ -19,13 +18,13 @@ router.post('/', verifyTokenandAdmin, async(req, res)=>{
 })
 
 //UPDATE
-router.put("/:id", verifyTokenandAdmin, async(req, res)=>{
+router.put("/:id", verifyTokenandAuth, async(req, res)=>{
     try{
-        const updaetProduct = await Product.findByIdAndUpdate(req.params.id, {
+        const updaetCart = await Cart.findByIdAndUpdate(req.params.id, {
             $set: req.body
         }, {new: true})
 
-        res.status(200).send(updaetProduct);
+        res.status(200).send(updaetCart);
     }catch(err){
         res.status(400).send("Update product err!!!");
     }
@@ -33,45 +32,32 @@ router.put("/:id", verifyTokenandAdmin, async(req, res)=>{
 
 
 //DELETE
-router.delete("/:id", verifyTokenandAdmin, async(req, res)=>{
+router.delete("/:id", verifyTokenandAuth, async(req, res)=>{
     try{
-        await Product.findByIdAndDelete(req.params.id);
-        res.status(200).send("Product has been deleted");
+        await Cart.findByIdAndDelete(req.params.id);
+        res.status(200).send("Cart has been deleted");
     }catch(err){
         res.status(400).send("Delete error");
     }
 })
 
 //GET PRODUCT
-router.get("/find/:id", async(req, res)=>{
+router.get("/find/:userId", async(req, res)=>{
     try{
-        const getProduct = await Product.findById(req.params.id);
-        res.status(200).send(getProduct);
+        const getCart = await Cart.findOne({userId: req.params.userId});
+        res.status(200).send(getCart);
     }catch(err){
-        res.status(400).send("Get product error");
+        res.status(400).send("Get Cart error");
     }
 })
 
-//GET ALL USERS
-router.get("/", async(req, res)=>{
-    const newQuery = req.query.new;
-    const categoryQuery = req.query.category;
+//GET ALL 
+router.get("/",verifyTokenandAdmin ,async(req, res)=>{
     try{
-        let getProducts;
-
-        if(newQuery){
-            getProducts = await Product.find().sort({createdAt: -1}).limit(5);
-        }else if(categoryQuery){
-            getProducts = await Product.find({category:{
-                $in:[categoryQuery]
-            }})
-        }else{
-            getProducts = await Product.find();
-        }
-        
-        res.status(200).send(getProducts);
+        const carts = await Cart.find();
+        res.status(200).send(carts)
     }catch(err){
-        res.status(400).send("Get all product error");
+        res.status(400).send("Get all Cart error");
     }
 })
 

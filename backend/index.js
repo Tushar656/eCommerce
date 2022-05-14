@@ -11,6 +11,8 @@ dotenv.config();
 const authRoute = require("./Routes/auth");
 const userRoute = require("./Routes/User");
 const productRoute = require("./Routes/product");
+const cartRoute = require("./Routes/cart");
+const orderRoute = require("./Routes/order");
 
 const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGO_URL)
@@ -21,6 +23,8 @@ mongoose.connect(process.env.MONGO_URL)
 app.use('/api/auth', authRoute);
 app.use('/api/user', userRoute);
 app.use('/api/product', productRoute);
+app.use('/api/cart', cartRoute);
+app.use('/api/order', orderRoute);
 
 app.listen(process.env.PORT || 8000, ()=>{
     console.log("Server is run at port 8000");
