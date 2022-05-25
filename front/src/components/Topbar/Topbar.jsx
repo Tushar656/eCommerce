@@ -1,8 +1,11 @@
 import { EmailRounded, Facebook, Instagram, Phone, Search, ShoppingCartRounded, Twitter } from '@material-ui/icons'
 import React from 'react'
 import "./Topbar.scss"
+import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const Topbar = () => {
+    const quintity = useSelector(state=> state.cart.quntity);
   return (
     <div className='Topbar'>
         <div className="topbarwraper">
@@ -37,7 +40,9 @@ const Topbar = () => {
                     <li className="headerListItems">About Us</li>
                     <li className="headerListItems">Contact Us</li>
                     <li className="headerListItems">My Account</li>
-                    <li className="headerListItems"><ShoppingCartRounded/></li>
+                    <Link to={'/cart'}>
+                        <li className="headerListItems hliCart">{quintity!==0 ? <span>{quintity}</span> : ""}<ShoppingCartRounded/></li>
+                    </Link>
                     <li className="headerListItems"><Search/></li>
                 </ul>
             </div>

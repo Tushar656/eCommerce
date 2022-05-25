@@ -51,16 +51,18 @@ router.get("/find/:id", async(req, res)=>{
     }
 })
 
-//GET ALL USERS
+//GET ALL PRODUCTS
 router.get("/", async(req, res)=>{
-    const newQuery = req.query.new;
-    const categoryQuery = req.query.category;
+    let newQuery = req.query.new;
+    let categoryQuery = req.query.category;
     try{
         let getProducts;
-
+        
         if(newQuery){
+            newQuery.toLowerCase();
             getProducts = await Product.find().sort({createdAt: -1}).limit(5);
         }else if(categoryQuery){
+            categoryQuery = categoryQuery.toLowerCase();
             getProducts = await Product.find({category:{
                 $in:[categoryQuery]
             }})

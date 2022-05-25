@@ -23,7 +23,7 @@ router.post('/register', async(req, res)=>{
 
 
 //LOGIN
-router.get('/login', async(req, res)=>{
+router.post('/login', async(req, res)=>{
     try{
         const getUser = await User.findOne({username: req.body.username});
 
@@ -32,6 +32,7 @@ router.get('/login', async(req, res)=>{
         const hashPass = CryptoJS.AES.decrypt(getUser.password, process.env.PASS_SEC);
         const getPassword = hashPass.toString(CryptoJS.enc.Utf8);
 
+        // res.send(getPassword)
         
         getPassword !== req.body.password && res.status(401).send("Login error");
 

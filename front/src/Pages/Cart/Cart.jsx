@@ -1,10 +1,13 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import Footer from '../../components/Footer/Footer'
 import NewsLetter from '../../components/Newsletter/NewsLetter'
 import Topbar from '../../components/Topbar/Topbar'
 import "./Cart.scss"
 
 function Cart() {
+    const cart = useSelector(state=> state.cart);
+    console.log(cart);
   return (
       <>
         <Topbar/>
@@ -17,40 +20,24 @@ function Cart() {
 
                 <div className="CartItems">
 
-                    <div className="cartItem">
+                    {cart.products.map((m)=>(
+                        <div className="cartItem" key={m._id}>
                         <div className="cartLeft">
-                            <img src="https://m.media-amazon.com/images/I/717iSc2atIL._AC_UL480_FMwebp_QL65_.jpg" alt="" />
+                            <img src={m.img} alt="" />
                         </div>
                         <div className="cartRight">
                             <div className="CartItemLeft">
                                 <div className="cartItemLeftSection">
-                                    <div><b>Product: </b>Lorem ipsum dolor</div>
-                                    <div><b>ID: </b>6784523</div>
-                                    <div className="CartItemPrice">$25</div>
+                                    <div><b>Product: </b>{m.title}</div>
+                                    <div><b>ID: </b>{m._id}</div>
+                                    <div className="CartItemPrice">${m.price}</div>
                                 </div>
                             </div>
                             <div className="CartItemRight">
                                 - 2 +
                             </div>
                         </div>
-                    </div>
-                    <div className="cartItem">
-                        <div className="cartLeft">
-                            <img src="https://m.media-amazon.com/images/I/91aRvAJ0QXL._AC_UL480_FMwebp_QL65_.jpg" alt="" />
-                        </div>
-                        <div className="cartRight">
-                            <div className="CartItemLeft">
-                                <div className="cartItemLeftSection">
-                                    <div><b>Product: </b>Lorem ipsum dolor</div>
-                                    <div><b>ID: </b>6784523</div>
-                                    <div className="CartItemPrice">$25</div>
-                                </div>
-                            </div>
-                            <div className="CartItemRight">
-                                - 2 +
-                            </div>
-                        </div>
-                    </div>
+                    </div>))}
                 </div>
 
                 <div className="cartShiping">

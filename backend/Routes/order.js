@@ -41,7 +41,7 @@ router.delete("/:id", verifyTokenandAdmin, async(req, res)=>{
     }
 })
 
-//GET PRODUCT
+//GET Order
 router.get("/find/:userId", async(req, res)=>{
     try{
         const getOrder = await Order.find({userId: req.params.userId});
